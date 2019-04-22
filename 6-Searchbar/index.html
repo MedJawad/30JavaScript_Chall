@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Type Ahead 👀</title>
+</head>
+<body>
+
+  <form class="search-form">
+    <input type="text" class="search" placeholder="City or State">
+    <ul class="suggestions">
+      <li>Filter for a city</li>
+      <li>or a state</li>
+    </ul>
+  </form>
+<script>
+const endpoint = 'https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb29/raw/2bf258763cdddd704f8ffd3ea9a3e81d25e2c6f6/cities.json';
+const cities = []; 
+let showcity = [];
+fetch(endpoint)
+.then(data => data.json())
+.then(cit => cities.push(...cit));
+
+ const elm = document.getElementsByClassName("search");
+ elm[0].addEventListener("change",displaycity);
+ elm[0].addEventListener("keyup",displaycity);
+
+function itmatches(cty,cities){  
+
+  var reg = new RegExp(cty,'gi');
+  return cities.filter(c => c.city.match(reg)
+  ||c.state.match(reg) );
+}
+function displaycity() {
+  const matcharray = itmatches(this.value,cities);
+  console.log(matcharray);
+  /*console.log(this.value);*/
+  let list = document.querySelector(".suggestions");
+  list.innerHTML="";
+  for(var i=0;i<matcharray.length;i++){
+  var listelm = document.createElement("li");
+  var contnt = document.createTextNode(JSON.stringify(matcharray[i]));
+  listelm.appendChild(contnt);
+  list.appendChild(listelm);
+  }
+}
+</script>
+</body>
+</html>

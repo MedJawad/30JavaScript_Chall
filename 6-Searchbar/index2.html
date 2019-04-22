@@ -1,0 +1,86 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Advanced Searchbar</title>
+    <style>
+        body{
+            background-image: url("https://images.pexels.com/photos/1034662/pexels-photo-1034662.jpeg?auto=compress&cs=tinysrgb&h=650&w=940");
+            background-repeat: no-repeat;
+            background-size: cover;
+            overflow-x: hidden;
+        }
+        .container{
+            width: 80%;
+            margin: auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            font-family:Arial, Helvetica, sans-serif;
+            letter-spacing: 1px;
+        }
+        input{
+            width: 50%;height: 50px;
+            text-align: center;
+            border-radius: 10px;border: 1px solid gray;
+            margin-top : 50px;
+        }
+        ul{
+            list-style: circle;
+            width:90%;
+            margin: auto;
+        }
+        li{
+            overflow: auto;
+            text-align: center;
+            border-radius: 10px;border: 1px solid gray;
+            background-color:burlywood;
+            margin: 5px;padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+    <input class="input" type="text" placeholder="Enter Name of City" >
+    <ul id="result">
+        </ul>
+    </div>
+<script>
+    const endpoint = 'https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb29/raw/2bf258763cdddd704f8ffd3ea9a3e81d25e2c6f6/cities.json';
+    const cities=[];
+   fetch(endpoint).then(prom => prom.json()).then(data => cities.push(...data));
+    console.log(cities);
+    function matchcity(inp,citarr){
+        var regex = new RegExp(inp,'gi');
+        //console.log(cities);
+        return citarr.filter(c => c.city.match(regex)||c.state.match(regex));
+    }
+    /**/
+    //var elements = matchcity("bos",cities);
+    //console.log(elements);
+    function showcity(){
+        var elmnts = matchcity(this.value,cities);
+        console.log(elmnts);
+        ul=document.querySelector("ul");
+        ul.innerHTML="";
+        if(this.value.length<1) return "";
+        for(var i=0 ; i<elmnts.length;i++ ){
+        li=document.createElement("li");
+        content="City: "+elmnts[i].city+
+        " | growth: "+elmnts[i].growth_from_2000_to_2013+
+        " | population: "+elmnts[i].population+
+        " | rank: "+elmnts[i].rank+
+        " | state: "+elmnts[i].state;
+        html=document.createTextNode(content);
+        li.appendChild(html);
+        ul.appendChild(li);
+        }
+    }
+    input=document.querySelector("input");
+    input.addEventListener("change",showcity);
+    input.addEventListener("keyup",showcity);
+</script>
+</body>
+</html>

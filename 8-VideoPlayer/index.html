@@ -1,0 +1,82 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Video Player</title>
+    <style>
+      body {
+        background-color: goldenrod;
+        margin: 0;
+        text-align: center;
+      }
+
+      .video-player {
+        height: 600px;
+        background-color: brown;
+        display: inline-block;
+      }
+      video {
+        height: 100%;
+      }
+      #progress {
+        height: 15px;
+        width: 100%;
+        background-color: black;
+      }
+      #progress-bar {
+        width: 0%;
+        height: 100%;
+        background-color: brown;
+      }
+      .controls {
+        width: 100%;
+        display: none;
+      }
+      #progress:hover + .controls,
+      .controls:hover {
+        display: block;
+      }
+      .control {
+        display: inline-block;
+        width: 24%;
+      }
+      button,#vol {
+        width: 100%;
+        background-color: transparent;
+        border: 0;
+      }
+      button:hover,
+      #vol:hover {
+        background-color: chocolate;
+        cursor: pointer;
+      }
+      #progress {
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="video-player">
+      <video src="v.mp4"></video>
+      <div id="progress">
+        <div id="progress-bar"></div>
+      </div>
+
+      <div class="controls">
+        <div class="control" id="play-pause">
+          <button id="togglePP">►</button>
+        </div>
+
+        <div class="control" id="mvback"><button id="back">◀◀10</button></div>
+        <div class="control" id="mvforward">
+          <button id="forw">25►►</button>
+        </div>
+        <div class="control" id="vol-container">
+          <input type="range" id="vol" />
+        </div>
+      </div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>

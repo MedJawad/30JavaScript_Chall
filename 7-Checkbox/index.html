@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Special Checkbox</title>
+    <style>
+      .checkbox-container {
+        border: 1px solid black;
+        text-align: center;
+        font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+        font-size: 180%;
+      }
+      .option-container {
+        padding: 20px;
+        border: 1px solid black;
+      }
+      input {
+        position: absolute;
+        left: 20px;
+        height: 30px;
+        width: 30px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="checkbox-container">
+        <div class="option-container">
+          <input type="checkbox" name="multicheck" tabindex="0" /><label
+            for="multicheck"
+            >If you check</label
+          >
+        </div>
+        <div class="option-container">
+          <input type="checkbox" name="multicheck" tabindex="1" /><label
+            for="multicheck"
+            >One of these</label
+          >
+        </div>
+        <div class="option-container">
+          <input type="checkbox" name="multicheck" tabindex="2" /><label
+            for="multicheck"
+            >and hold shift
+          </label>
+        </div>
+        <div class="option-container">
+          <input type="checkbox" name="multicheck" tabindex="3" /><label
+            for="multicheck"
+            >when checking another</label
+          >
+        </div>
+        <div class="option-container">
+          <input type="checkbox" name="multicheck" tabindex="4" /><label
+            for="multicheck"
+            >all the cases in between</label
+          >
+        </div>
+        <div class="option-container">
+          <input type="checkbox" name="multicheck" tabindex="5" /><label
+            for="multicheck"
+            >the two checks will be checked</label
+          >
+        </div>
+      </div>
+    </div>
+    <script>
+      var r = true;
+      var endex = 1;
+      let v = false;
+      document.addEventListener("keydown", e => {
+        if (e.keyCode == 16) v = true;
+      });
+      document.addEventListener("keyup", e => {
+        if (e.keyCode == 16) v = false;
+      });
+      let inputs = document.querySelectorAll("input");
+      for (var i = 0; i < inputs.length; i++) {
+        inputs[i].addEventListener("change", function() {
+          if (v) {
+            if (this.checked) {
+              findstartend(this.tabIndex, true);
+            } else {
+              findstartend(this.tabIndex, false);
+            }
+          }
+        });
+      }
+      function findstartend(index, status) {
+        for (var i = 0; i < inputs.length && r; i++) {
+          if (inputs[i].checked) {
+            start = i;
+            r = false;
+          }
+        }
+        check(start, index, status);
+      }
+      function check(start, end, stat) {
+        if (end < start) {
+          var tmp = start;
+          start = end;
+          end = tmp;
+        }
+        if (stat) {
+          for (var i = start; i < end; i++) {
+            inputs[i].checked = true;
+          }
+        } else {
+          for (var i = start; i < end; i++) {
+            inputs[i].checked = false;
+          }
+        }
+      }
+    </script>
+  </body>
+</html>

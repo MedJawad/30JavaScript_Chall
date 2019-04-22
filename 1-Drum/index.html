@@ -1,0 +1,69 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Drum</title>
+    <style>
+        body{background-image: url(bg.jpg);}
+        .container{margin-top:250px;margin-left:200px;text-align: center;}
+        .btn{float: left;display: inline-block;padding:60px;margin: 10px;border: 1px soldata-key black;
+            background-image: url(btn.jpg) ;
+            background-position: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+            cursor: pointer;
+            transition: all 0.3 s ;
+        }
+        .btn:hover{
+            border: 2px yellow;
+        }
+        .playing{
+            box-shadow: 1px 1px 2px 3px darkorange ;
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+            <button data-key="65" class="btn" ><h2>A</h2></button>    
+            <button data-key="90" class="btn" ><h2>Z</h2></button>    
+            <button data-key="69" class="btn"><h2>E</h2></button>    
+            <button data-key="82" class="btn" ><h2>R</h2></button>    
+            <button data-key="84" class="btn"><h2>T</h2></button>    
+            <button data-key="89" class="btn"><h2>Y</h2></button>    
+        </div>
+        <audio data-key="65" src="A.mp3"></audio>
+        <audio data-key="90" src="Z.mp3"></audio>
+        <audio data-key="69" src="E.mp3"></audio>
+        <audio data-key="82" src="R.mp3"></audio>
+        <audio data-key="84" src="T.mp3"></audio>
+        <audio data-key="89" src="Y.mp3"></audio>
+        <script>       
+        /* function rm(key)
+         {alert("baz");key.classList.remove('playing');} */
+       /* function play(e,rm){
+             const sound = document.querySelector(`audio[data-key="${e.keyCode}"]`)
+            const key = document.querySelector(`button[data-key="${e.keyCode}"]`)
+            if(!sound) return; 
+            sound.play();
+            key.classList.add('playing');
+            rm();
+        }*/
+        document.addEventListener('keyup',function play(event){
+            var v=false;
+            const sound = document.querySelector(`audio[data-key="${event.keyCode}"]`)
+            const key = document.querySelector(`button[data-key="${event.keyCode}"]`)
+            if(!sound) return; 
+            sound.play();
+            key.classList.add('playing');
+            v=true;
+            setTimeout(function(){
+                key.classList.remove('playing');
+            },600);
+
+        });
+
+    </script>
+</body>
+</html>

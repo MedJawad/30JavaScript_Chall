@@ -1,0 +1,79 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>CSS</title>
+    <style>
+        :root{
+            --custom-bgcolor:rgb(0,128,128);
+            --custom-blur: blur(2px);
+            --custom-space: 5px;
+        }
+        body{
+            background-color: dimgrey;
+        }
+        .container{
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            width: 80%;margin: auto;text-align: center;color: antiquewhite;
+        }
+        h1{
+            font-size:50px;
+        }
+        span{font-size: 150%;}
+        #img-container{
+            background-color: var(--custom-bgcolor);
+            width: 820px;
+            height: 520px;
+            padding: 10px;
+            margin: auto;
+            margin-top: 30px;
+            
+        }
+        img{
+            filter: var(--custom-blur);  
+            margin-left: var(--custom-space,"10px"); 
+            margin-top: var(--custom-space,"10px"); 
+        }
+        #js{
+            color: var(--custom-bgcolor);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header><h1>Update CSS Variables with <br><span id="js">JS</span></h1></header>
+    <article>
+          <header>
+            <label><span> Margin :</span></label> <input id="mar" type="range">
+            <label><span>Blur :</span></label> <input id="blu"type="range">
+            <label><span>Color :</span></label> <input id="col" type="color" value=#008080>
+        </header>
+        <section>
+            <div id="img-container">
+                <img src="https://source.unsplash.com/7bwQXzbF6KE/800x500">
+            </div>
+        </section>
+    </article>
+    </div>
+ <script>
+     var rt = document.querySelector(":root");
+     var coul = document.getElementById("col");
+     var blur = document.getElementById("blu");
+     var marg = document.getElementById("mar");
+
+     coul.addEventListener("change",function(){
+         rt.style.setProperty('--custom-bgcolor',this.value);
+     })
+
+    blur.addEventListener("pointermove",function(){
+         rt.style.setProperty('--custom-blur',"blur("+this.value/30+"px)");
+     })
+     marg.addEventListener("pointermove",function(){
+         console.log(this.value);
+         rt.style.setProperty('--custom-space',this.value +"px");
+
+     })
+     </script>
+</body>
+</html>

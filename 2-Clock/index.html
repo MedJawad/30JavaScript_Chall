@@ -1,0 +1,73 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Clock</title>
+    <style>
+        body{
+            background-color: lightsteelblue;height: 500px;width: 500px;margin: auto;margin-top: 50px;  
+        }
+        .clock-container{
+            height: 100%;width: 100%;
+            border-radius: 50%;
+            border: 25px solid black ;
+            background-color: bisque;
+        }
+        .hand{
+            height: 2px;background-color: black;
+            position: relative;
+            top: 45%;left:50%;
+            transform-origin: left;
+        }
+        #seconds{width: 50%;background-color: red;z-index: 300;}
+        #minutes{width: 40%;z-index: 200;}
+        #hours{width: 30%;z-index: 100;}
+        #c0{position: relative;top: 5px;left: 48%;}
+        #c1{position: relative;top: 240px;left: 90%;}
+        #c2{position: relative;top: 480px;left: 45%;}
+        #c3{position: relative;top: 240px;left: -30px;}
+        #mid{width: 30px;height: 30px;
+        background-color: black;
+        border-radius: 50%;
+        position: relative;
+        top: 41%;left: 47%;z-index: 1000;
+        }
+    </style>
+</head>
+<body>
+    <div class="clock-container">
+        <span id="c0">12</span>        <span id="c1">3</span>        <span id="c2">6</span>        <span id="c3">9</span>
+        <div id="hours" class="hand"></div>
+        <div id="minutes" class="hand" ></div>
+        <div id="seconds" class="hand" ></div>
+        <div id="mid"></div>
+        <!--<canvas id="myCanvas"></canvas>-->
+    </div>
+
+    <script>
+        var d= new Date();
+        var s =d.getSeconds()-15;
+        var m =d.getMinutes()-15;
+        var h=0;
+        if(d.getHours()>11){h=d.getHours()-12-3;} 
+        else{h=d.getHours()-3;}
+        document.getElementById("seconds").style.transform="rotate("+(6*s)+"deg)";
+        document.getElementById("minutes").style.transform="rotate("+(6*m)+"deg)";
+        document.getElementById("hours").style.transform="rotate("+((30)*h)+"deg)";
+
+    setInterval(function(){
+        document.getElementById("seconds").style.transform+="rotate(6deg)";
+        s++;
+        if(s>59){document.getElementById("seconds").style.transform="";s=0;m++;}
+        document.getElementById("minutes").style.transform+="rotate(0.1deg)";
+        
+        if(m>59){document.getElementById("minutes").style.transform="";m=0;h++}
+        document.getElementById("hours").style.transform+="rotate("+0.1/60+"deg)";
+        
+        if(h>11){document.getElementById("hours").style.transform="";h=0;}
+    },1000);
+/**/
+</script>
+</body>
+</html>
